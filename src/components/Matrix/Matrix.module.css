@@ -55,3 +55,14 @@
 .cornerCell {
   background-color: #d0d0d0;
 }
+
+.sumCell {
+  font-weight: bold;
+  background-color: #dff0d8;
+  border: 1px solid #000;
+  text-align: center;
+}
+
+.sumCell:hover {
+  background-color: #c8e6c9;
+}
