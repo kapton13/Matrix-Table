@@ -4,6 +4,6 @@ import react from '@vitejs/plugin-react'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: '.', // URL for ghpages
+  base: 'https://github.com/kapton13/Matrix-Table.git', // URL for ghpages
 })
 
