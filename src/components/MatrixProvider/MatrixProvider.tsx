@@ -8,24 +8,28 @@ type MatrixProviderProps = {
 const MatrixProvider = ({ children }: MatrixProviderProps) => {
   const [matrix, setMatrix] = useState<Cell[][]>([]);
   const [dimensions, setDimensions] = useState<Dimensions>({ M: 0, N: 0 });
+  const [maxMatrixLength, setMaxMatrixLength] = useState(Number);
 
   const generateMatrix = (M: number, N: number) => {
     const newMatrix = Array.from({ length: M }, (_, rowIndex) =>
-      Array.from({ length: N }, (_, colIndex) => ({
+      Array.from({ length: N }, (_, colIndex) => {
+        setMaxMatrixLength(N);
+        return ({
         id: rowIndex * N + colIndex,
         amount: Math.floor(Math.random() * 900) + 100,
-      }))
+      })})
     );
     setMatrix(newMatrix);
     setDimensions({ M, N });
   };
-
+  
   const addRow = () => {
     if (dimensions.N === 0) return;
     const newRow = Array.from({ length: dimensions.N }, (_, colIndex) => ({
-      id: matrix.length * dimensions.N + colIndex,
-      amount: Math.floor(Math.random() * 100),
+      id: maxMatrixLength * dimensions.N + colIndex,
+      amount: Math.floor(Math.random() * 900) + 100,
     }));
+    setMaxMatrixLength(maxMatrixLength + 1);
     setMatrix([...matrix, newRow]);
     setDimensions({ ...dimensions, M: dimensions.M + 1 });
   };

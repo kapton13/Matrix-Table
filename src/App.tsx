@@ -1,6 +1,6 @@
 import React from 'react';
 import MatrixProvider from './components/MatrixProvider/MatrixProvider';
-import Controls from './components/MatrixForm/Controls';
+import Controls from './components/Controls/Controls';
 import Matrix from './components/Matrix/Matrix';
 
 import styles from './App.module.css';

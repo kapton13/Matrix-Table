@@ -1,46 +1,10 @@
-.matrix {
-  display: flex;
-  flex-direction: column;
+.matrixWrapper {
   width: 100%;
-}
-
-.row {
-  display: flex;
-  width: 100%;
-}
-
-.headerCell, .cell, .sumCell, .footerRow {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid #ddd;
-  padding: 10px;
-}
-
-.headerCell {
-  font-weight: bold;
-  background-color: #f0f0f0;
-}
-
-.cell {
-  background-color: #fff;
-  flex-direction: column;
-}
-
-.equalCell {
-  flex-grow: 1;
-}
-
-.sumCell {
-  background-color: #dff0d8;
-}
-
-.footerRow {
-  background-color: #ffebcc;
-}
-
-.cornerCell {
-  background-color: #f7f7f7;
+  max-height: 700px;
+  overflow-x: auto;
+  overflow-y: auto;
+  padding-bottom: 10px;
+  position: relative;
 }
 
 .cellId {
@@ -67,3 +31,86 @@
 .removeBtn:hover {
   background-color: rgb(212, 77, 77);
 }
+
+.matrix {
+  display: grid;
+  gap: 1px;
+  grid-template-columns: auto;
+  grid-template-rows: auto;
+  border: 1px solid #ccc;
+}
+
+.header {
+  font-weight: bold;
+  background-color: #f0f0f0;
+  text-align: center;
+  padding: 10px;
+  border: 1px solid #000;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background-color: #fff;
+  border: 1px solid #ddd;
+}
+
+.even {
+  background-color: #f9f9f9;
+}
+
+.odd {
+  background-color: #e9e9e9;
+}
+
+.sumCell {
+  font-weight: bold;
+  background-color: #dff0d8;
+  border: 1px solid #000;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0 5px;
+}
+
+.emptyCell {
+  padding: 10px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+}
+
+/* Element Fixing Styles */
+.headerColumn {
+  position: sticky;
+  left: 0;
+  z-index: 2;
+}
+
+.headerRow {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+.footerRow {
+  position: sticky;
+  bottom: 0;
+  z-index: 2;
+}
+
+.sumColumn {
+  position: sticky;
+  right: 0;
+  z-index: 2;
+}
+
+.maxZindex {
+  z-index: 3;
+} 
