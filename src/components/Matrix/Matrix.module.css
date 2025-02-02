@@ -1,0 +1,40 @@
+.matrixContainer {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+  }
+  
+  .matrix {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .row {
+    display: flex;
+    flex-direction: row;
+  }
+  
+  .cell {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    margin: 2px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    width: 120px;
+    height: 80px;
+    box-sizing: border-box;
+  }
+  
+  .cellId {
+    font-weight: bold;
+    font-size: 14px;
+    margin-bottom: 5px;
+  }
+  
+  .amount {
+    font-size: 18px;
+    color: #333;
+  }
