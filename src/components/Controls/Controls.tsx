@@ -1,5 +1,4 @@
-import { useMatrix } from "../../context/MatrixContext";
-
+import { useMatrix } from "../../hooks/useMatrix";
 import styles from "./Controls.module.css";
 
 const Controls: React.FC = () => {

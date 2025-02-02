@@ -1,4 +1,4 @@
-import { createContext, useContext } from "react";
+import { createContext } from "react";
 
 type CellId = number;
 type CellValue = number;
@@ -14,7 +14,7 @@ export type Dimensions = {
   N: number;
 };
 
-type MatrixContextType = {
+export type MatrixContextType = {
   matrix: Cell[][];
   setMatrix: React.Dispatch<React.SetStateAction<Cell[][]>>;
   dimensions: Dimensions;
@@ -27,13 +27,5 @@ type MatrixContextType = {
 };
 
 const MatrixContext = createContext<MatrixContextType | null>(null);
-
-export const useMatrix = (): MatrixContextType => {
-  const context = useContext(MatrixContext);
-  if (!context) {
-    throw new Error("useMatrix must be used within a MatrixProvider");
-  }
-  return context;
-};
 
 export default MatrixContext;

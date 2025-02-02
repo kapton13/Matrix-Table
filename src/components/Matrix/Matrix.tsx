@@ -1,5 +1,6 @@
 import { useState, Fragment } from 'react';
-import { Cell, useMatrix } from "../../context/MatrixContext";
+import { Cell } from "../../context/MatrixContext";
+import { useMatrix } from '../../hooks/useMatrix';
 
 import styles from './Matrix.module.css';
 
