@@ -1,4 +1,4 @@
-import { useState, Fragment } from 'react';
+import { useState, Fragment, useMemo, useCallback } from 'react';
 import { Cell } from "../../context/MatrixContext";
 import { useMatrix } from '../../hooks/useMatrix';
 
@@ -10,13 +10,13 @@ const Matrix: React.FC = () => {
     const [nearestNumbers, setNearestNumbers] = useState<number[] | null>(null);
     const [activeCellId, setActiveCellId] = useState<number | null>(null);
     
-     const colSums = Array.from({ length: dimensions.N }, (_, colIndex) =>
+     const colSums = useMemo(() =>  Array.from({ length: dimensions.N }, (_, colIndex) =>
       matrix.reduce((sum, row) => sum + (row[colIndex]?.amount || 0), 0) / 2
-    );
+    ),[matrix, dimensions.N]);
 
-    const findNearestNumbers = (targetCell: Cell) => {
+    const findNearestNumbers = useCallback( (targetCell: Cell) => {
         if (!nearestCount) return;
-        const closestCells  = matrix.flatMap((row) => row.map((cell) => cell))
+        const closestCells  = matrix.flat()
         .filter(cell => cell.id !== targetCell.id)
         .sort((a, b) => Math.abs(a.amount - targetCell.amount) - Math.abs(b.amount - targetCell.amount))
         .slice(0, nearestCount).reduce<number[]>((acc, cell) => { 
@@ -24,7 +24,7 @@ const Matrix: React.FC = () => {
         return acc 
     }, []);
         setNearestNumbers(closestCells );
-    };
+    }, [matrix, nearestCount]);
   
     return (
       <div className={styles.matrixWrapper}>
