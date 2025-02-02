@@ -4,7 +4,7 @@ import { useMatrix } from "../../context/MatrixContext";
 import styles from './Matrix.module.css';
 
 const Matrix: React.FC = () => {
-    const { matrix, dimensions, removeRow } = useMatrix();
+    const { matrix, dimensions, removeRow, incrementCell } = useMatrix();
   
      const colSums = Array.from({ length: dimensions.N }, (_, colIndex) =>
       matrix.reduce((sum, row) => sum + (row[colIndex]?.amount || 0), 0) / 2
@@ -33,6 +33,7 @@ const Matrix: React.FC = () => {
                     <div
                         key={`cell-${rowIndex}-${colIndex}`}  
                         className={`${styles.cell} ${rowIndex % 2 === 0 ? styles.even : styles.odd}`}
+                        onClick={() => incrementCell(rowIndex, colIndex)}
                     >
                         <div className={styles.cellId}>{cell.id}</div>
                         <div className={styles.amount}>{cell.amount}</div>

@@ -20,6 +20,7 @@ type MatrixContextType = {
   generateMatrix: (M: number, N: number) => void;
   addRow: () => void;
   removeRow: (index: number) => void;
+  incrementCell: (rowIndex: number, colIndex: number) => void;
 };
 
 const MatrixContext = createContext<MatrixContextType | null>(null);

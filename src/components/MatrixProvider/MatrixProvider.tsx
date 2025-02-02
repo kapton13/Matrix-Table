@@ -40,8 +40,21 @@ const MatrixProvider = ({ children }: MatrixProviderProps) => {
     setDimensions({ ...dimensions, M: dimensions.M - 1 });
   };
 
+  const incrementCell = (rowIndex: number, colIndex: number) => {
+    setMatrix((prevMatrix) => {
+      const updatedMatrix = prevMatrix.map((row, rIdx) =>
+        rIdx === rowIndex
+          ? row.map((cell, cIdx) =>
+              cIdx === colIndex ? { ...cell, amount: cell.amount + 1 } : cell
+            )
+          : row
+      );
+      return updatedMatrix;
+    });
+  };
+
   return (
-    <MatrixContext.Provider value={{ matrix, setMatrix, dimensions, generateMatrix, addRow, removeRow}}>
+    <MatrixContext.Provider value={{ matrix, setMatrix, dimensions, generateMatrix, addRow, removeRow, incrementCell }}>
       {children}
     </MatrixContext.Provider>
   );
