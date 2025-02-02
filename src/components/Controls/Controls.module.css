@@ -4,6 +4,14 @@
   margin-bottom: 20px;
 }
 
+.label {
+  font-size: 18px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
 .input {
   padding: 10px;
   border: 1px solid #ccc;

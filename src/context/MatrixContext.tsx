@@ -2,6 +2,7 @@ import { createContext, useContext } from "react";
 
 type CellId = number;
 type CellValue = number;
+type NearestCount = number;
 
 export type Cell = {
   id: CellId;
@@ -17,6 +18,8 @@ type MatrixContextType = {
   matrix: Cell[][];
   setMatrix: React.Dispatch<React.SetStateAction<Cell[][]>>;
   dimensions: Dimensions;
+  nearestCount: NearestCount;
+  setNearestCount: React.Dispatch<React.SetStateAction<NearestCount>>;
   generateMatrix: (M: number, N: number) => void;
   addRow: () => void;
   removeRow: (index: number) => void;

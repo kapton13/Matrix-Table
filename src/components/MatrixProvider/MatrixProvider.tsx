@@ -9,6 +9,7 @@ const MatrixProvider = ({ children }: MatrixProviderProps) => {
   const [matrix, setMatrix] = useState<Cell[][]>([]);
   const [dimensions, setDimensions] = useState<Dimensions>({ M: 0, N: 0 });
   const [maxMatrixLength, setMaxMatrixLength] = useState(Number);
+  const [nearestCount, setNearestCount] = useState<number>(0);
 
   const generateMatrix = (M: number, N: number) => {
     const newMatrix = Array.from({ length: M }, (_, rowIndex) =>
@@ -54,7 +55,7 @@ const MatrixProvider = ({ children }: MatrixProviderProps) => {
   };
 
   return (
-    <MatrixContext.Provider value={{ matrix, setMatrix, dimensions, generateMatrix, addRow, removeRow, incrementCell }}>
+    <MatrixContext.Provider value={{ matrix, setMatrix, dimensions, generateMatrix, addRow, removeRow, incrementCell, nearestCount, setNearestCount }}>
       {children}
     </MatrixContext.Provider>
   );

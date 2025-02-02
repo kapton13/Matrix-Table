@@ -1,16 +1,28 @@
 import { useState, Fragment } from 'react';
-import { useMatrix } from "../../context/MatrixContext";
+import { Cell, useMatrix } from "../../context/MatrixContext";
 
 import styles from './Matrix.module.css';
 
 const Matrix: React.FC = () => {
-    const { matrix, dimensions, removeRow, incrementCell } = useMatrix();
+    const { matrix, dimensions, removeRow, incrementCell, nearestCount } = useMatrix();
     const [hoveredRow, setHoveredRow] = useState<number | null>(null);
-    console.log('matrix', matrix);
+    const [nearestNumbers, setNearestNumbers] = useState<number[] | null>(null);
   
      const colSums = Array.from({ length: dimensions.N }, (_, colIndex) =>
       matrix.reduce((sum, row) => sum + (row[colIndex]?.amount || 0), 0) / 2
     );
+
+    const findNearestNumbers = (targetCell: Cell) => {
+        if (!nearestCount) return;
+        const closestCells  = matrix.flatMap((row) => row.map((cell) => cell))
+        .filter(cell => cell.id !== targetCell.id)
+        .sort((a, b) => Math.abs(a.amount - targetCell.amount) - Math.abs(b.amount - targetCell.amount))
+        .slice(0, nearestCount).reduce<number[]>((acc, cell) => { 
+            acc.push(cell.id) 
+        return acc 
+    }, []);
+        setNearestNumbers(closestCells );
+    }
   
     return (
       <div className={styles.matrixWrapper}>
@@ -38,9 +50,12 @@ const Matrix: React.FC = () => {
                     return (
                     <div
                         key={`cell-${rowIndex}-${colIndex}`}  
-                        className={`${styles.cell} ${rowIndex % 2 === 0 ? styles.even : styles.odd}`}
+                        className={`${styles.cell} ${rowIndex % 2 === 0 ? styles.even : styles.odd}  ${nearestNumbers?.includes(cell.id) ? styles.nearest : ""}`}
                         onClick={() => incrementCell(rowIndex, colIndex)}
-                        style={{ backgroundColor: hoveredRow === rowIndex ? `rgba(255, 0, 0, ${intensity / 255})` : "" }}
+                        style={{ 
+                            backgroundColor: hoveredRow === rowIndex ? `rgba(255, 0, 0, ${intensity / 255})` : "" }}
+                        onMouseEnter={() => findNearestNumbers(cell)}
+                        onMouseLeave={() => setNearestNumbers(null)}
                     >
                         <div className={styles.cellId}>{cell.id}</div>
                         <div className={styles.amount}>{hoveredRow === rowIndex ? `${percentage}%` : cell.amount}</div>
