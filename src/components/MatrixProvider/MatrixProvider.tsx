@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import MatrixContext from "../../context/MatrixContext";
+import { useState } from "react";
+import MatrixContext, { Cell, Dimensions } from "../../context/MatrixContext";
 
 type MatrixProviderProps = {
   children: React.ReactNode;

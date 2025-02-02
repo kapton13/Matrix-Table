@@ -1,4 +1,3 @@
-import React from "react";
 import { useMatrix } from "../../context/MatrixContext";
 
 import styles from "./Controls.module.css";

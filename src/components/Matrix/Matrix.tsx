@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState, Fragment } from 'react';
 import { useMatrix } from "../../context/MatrixContext";
 
 import styles from './Matrix.module.css';
@@ -6,6 +6,7 @@ import styles from './Matrix.module.css';
 const Matrix: React.FC = () => {
     const { matrix, dimensions, removeRow, incrementCell } = useMatrix();
     const [hoveredRow, setHoveredRow] = useState<number | null>(null);
+    console.log('matrix', matrix);
   
      const colSums = Array.from({ length: dimensions.N }, (_, colIndex) =>
       matrix.reduce((sum, row) => sum + (row[colIndex]?.amount || 0), 0) / 2
@@ -25,7 +26,7 @@ const Matrix: React.FC = () => {
                 const maxVal = Math.max(...row.map(cell => cell.amount));
             
             return (
-                <React.Fragment key={`row-${rowIndex}`}>
+                <Fragment key={`row-${rowIndex}`}>
                 <div className={`${styles.header} ${styles.headerColumn}`}>
                     {rowIndex + 1}
                     <button onClick={() => removeRow(rowIndex)} className={styles.removeBtn}>✖</button>
@@ -53,7 +54,7 @@ const Matrix: React.FC = () => {
                 >
                     {rowSum}
                 </div>
-                </React.Fragment>
+                </Fragment>
             );
             })}
     

@@ -1,4 +1,3 @@
-import React from 'react';
 import MatrixProvider from './components/MatrixProvider/MatrixProvider';
 import Controls from './components/Controls/Controls';
 import Matrix from './components/Matrix/Matrix';

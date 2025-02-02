@@ -1,14 +1,14 @@
-import React, { createContext, useContext, useState, ReactNode } from "react";
+import { createContext, useContext } from "react";
 
 type CellId = number;
 type CellValue = number;
 
-type Cell = {
+export type Cell = {
   id: CellId;
   amount: CellValue;
 };
 
-type Dimensions = {
+export type Dimensions = {
   M: number;
   N: number;
 };
