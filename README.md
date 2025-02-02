@@ -67,3 +67,5 @@ Give the ability to remove any row in the table. Sum and average values should b
 ## As a user I should be able to add a row
 A new row should be appended at the end of the table, sum and average values should be recalculated respectively.
 
+
+# [DEMO LINK](https://kapton13.github.io/Matrix-Table/)

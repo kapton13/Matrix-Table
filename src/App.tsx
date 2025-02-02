@@ -9,7 +9,7 @@ const App: React.FC = () => {
   return (
     <MatrixProvider>
       <div className={styles.container}>
-        <h1>Matrix Generator</h1>
+        <h1>Matrix Table</h1>
         <Controls />
         <Matrix />
       </div>

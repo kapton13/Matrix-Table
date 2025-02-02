@@ -8,7 +8,8 @@ const Matrix: React.FC = () => {
     const { matrix, dimensions, removeRow, incrementCell, nearestCount } = useMatrix();
     const [hoveredRow, setHoveredRow] = useState<number | null>(null);
     const [nearestNumbers, setNearestNumbers] = useState<number[] | null>(null);
-  
+    const [activeCellId, setActiveCellId] = useState<number | null>(null);
+    
      const colSums = Array.from({ length: dimensions.N }, (_, colIndex) =>
       matrix.reduce((sum, row) => sum + (row[colIndex]?.amount || 0), 0) / 2
     );
@@ -23,7 +24,7 @@ const Matrix: React.FC = () => {
         return acc 
     }, []);
         setNearestNumbers(closestCells );
-    }
+    };
   
     return (
       <div className={styles.matrixWrapper}>
@@ -51,12 +52,16 @@ const Matrix: React.FC = () => {
                     return (
                     <div
                         key={`cell-${rowIndex}-${colIndex}`}  
-                        className={`${styles.cell} ${rowIndex % 2 === 0 ? styles.even : styles.odd}  ${nearestNumbers?.includes(cell.id) ? styles.nearest : ""}`}
+                        className={`${styles.cell} ${rowIndex % 2 === 0 ? styles.even : styles.odd}  
+                            ${nearestNumbers?.includes(cell.id) ? styles.nearest : ""} 
+                            ${activeCellId === cell.id ? styles.active : ""}`}
                         onClick={() => incrementCell(rowIndex, colIndex)}
                         style={{ 
                             backgroundColor: hoveredRow === rowIndex ? `rgba(255, 0, 0, ${intensity / 255})` : "" }}
                         onMouseEnter={() => findNearestNumbers(cell)}
                         onMouseLeave={() => setNearestNumbers(null)}
+                        onMouseDown={() => setActiveCellId(cell.id)}
+                        onMouseUp={() => setActiveCellId(null)}
                     >
                         <div className={styles.cellId}>{cell.id}</div>
                         <div className={styles.amount}>{hoveredRow === rowIndex ? `${percentage}%` : cell.amount}</div>

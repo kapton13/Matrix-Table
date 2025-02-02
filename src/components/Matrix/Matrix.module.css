@@ -73,6 +73,10 @@
   background-color: #1e9be9;
 }
 
+.active {
+  background-color: #2fc85a;
+}
+
 .sumCell {
   font-weight: bold;
   background-color: #dff0d8;
