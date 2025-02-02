@@ -4,7 +4,7 @@ import { useMatrix } from "../../context/MatrixContext";
 import styles from './Matrix.module.css';
 
 const Matrix: React.FC = () => {
-  const { matrix } = useMatrix();
+  const { matrix, removeRow } = useMatrix();
 
   if (matrix.length === 0) return null;
 
@@ -32,7 +32,10 @@ const Matrix: React.FC = () => {
 
           return (
             <div key={rowIndex} className={styles.row}>
-              <div className={styles.headerCell}>{rowIndex + 1}</div>
+              <div className={styles.headerCell}>
+                {rowIndex + 1}
+                <button onClick={() => removeRow(rowIndex)} className={styles.removeBtn}>✖</button>
+                </div>
               {row.map((cell) => (
                 <div key={cell.id} className={`${styles.cell} ${styles.equalCell}`} style={{ width: `${100 / (matrix[0].length + 1)}%` }}>
                   <div className={styles.cellId}>{cell.id}</div>

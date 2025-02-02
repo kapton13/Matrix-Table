@@ -30,8 +30,14 @@ const MatrixProvider = ({ children }: MatrixProviderProps) => {
     setDimensions({ ...dimensions, M: dimensions.M + 1 });
   };
 
+  const removeRow = (index: number) => {
+    const newMatrix = matrix.filter((_, rowIndex) => rowIndex !== index);
+    setMatrix(newMatrix);
+    setDimensions({ ...dimensions, M: dimensions.M - 1 });
+  };
+
   return (
-    <MatrixContext.Provider value={{ matrix, setMatrix, dimensions, generateMatrix, addRow}}>
+    <MatrixContext.Provider value={{ matrix, setMatrix, dimensions, generateMatrix, addRow, removeRow}}>
       {children}
     </MatrixContext.Provider>
   );
