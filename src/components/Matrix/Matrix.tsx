@@ -1,9 +1,10 @@
 import React from 'react';
-import { useMatrixContext } from '../../context/MatrixContext';
+import { useMatrix } from "../../context/MatrixContext";
+
 import styles from './Matrix.module.css';
 
 const Matrix: React.FC = () => {
-  const { matrix } = useMatrixContext();
+  const { matrix } = useMatrix();
 
   if (matrix.length === 0) return null;
 
@@ -32,7 +33,7 @@ const Matrix: React.FC = () => {
           return (
             <div key={rowIndex} className={styles.row}>
               <div className={styles.headerCell}>{rowIndex + 1}</div>
-              {row.map((cell, colIndex) => (
+              {row.map((cell) => (
                 <div key={cell.id} className={`${styles.cell} ${styles.equalCell}`} style={{ width: `${100 / (matrix[0].length + 1)}%` }}>
                   <div className={styles.cellId}>{cell.id}</div>
                   <div className={styles.amount}>{cell.amount}</div>

@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, { createContext, useContext, useState, ReactNode } from "react";
 
 type CellId = number;
 type CellValue = number;
@@ -8,27 +8,27 @@ type Cell = {
   amount: CellValue;
 };
 
-interface MatrixContextType {
-  matrix: Cell[][];
-  setMatrix: React.Dispatch<React.SetStateAction<Cell[][]>>;
-}
-
-const MatrixContext = createContext<MatrixContextType | undefined>(undefined);
-
-export const MatrixProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [matrix, setMatrix] = useState<Cell[][]>([]);
-
-  return (
-    <MatrixContext.Provider value={{ matrix, setMatrix }}>
-      {children}
-    </MatrixContext.Provider>
-  );
+type Dimensions = {
+  M: number;
+  N: number;
 };
 
-export const useMatrixContext = (): MatrixContextType => {
+type MatrixContextType = {
+  matrix: Cell[][];
+  setMatrix: React.Dispatch<React.SetStateAction<Cell[][]>>;
+  dimensions: Dimensions;
+  generateMatrix: (M: number, N: number) => void;
+  addRow: () => void;
+};
+
+const MatrixContext = createContext<MatrixContextType | null>(null);
+
+export const useMatrix = (): MatrixContextType => {
   const context = useContext(MatrixContext);
   if (!context) {
-    throw new Error('useMatrixContext must be used within a MatrixProvider');
+    throw new Error("useMatrix must be used within a MatrixProvider");
   }
   return context;
 };
+
+export default MatrixContext;
